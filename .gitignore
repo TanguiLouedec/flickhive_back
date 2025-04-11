@@ -1,0 +1,45 @@
+# ------------------------------------------------------
+# Go Build Artifacts
+# ------------------------------------------------------
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+
+# Binaries and build output (if you keep them in these dirs)
+bin/
+build/
+
+# ------------------------------------------------------
+# Go Module
+# ------------------------------------------------------
+# Note: Typically, you do NOT ignore go.mod or go.sum,
+# because they track your module dependencies.
+# If you use vendoring:
+# vendor/  (uncomment if you do NOT commit vendor to Git)
+
+# ------------------------------------------------------
+# Logs
+# ------------------------------------------------------
+*.log
+
+# ------------------------------------------------------
+# OS / Editor / IDE Specific
+# ------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ------------------------------------------------------
+# Testing and Coverage
+# ------------------------------------------------------
+*.coverprofile
+*.cov
+coverage.out
+
+# ------------------------------------------------------
+# Env Files (Secrets)
+# ------------------------------------------------------
+.env
