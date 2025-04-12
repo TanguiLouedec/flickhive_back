@@ -34,9 +34,9 @@ func GetUserByEmail(db *sql.DB, email string) (*models.User, error) {
 	return &user, nil
 }
 
-func GetUserByID(db *sql.DB, id int64) (*models.User, error) {
+func GetUserByID(db *sql.DB, id string) (*models.User, error) {
 	var user models.User
-	query := `SELECT id, username, email, password, created_at, FROM users WHERE id = $1`
+	query := `SELECT id, username, email, password, created_at FROM users WHERE id = $1`
 	err := db.QueryRow(query, id).Scan(
 		&user.ID,
 		&user.Username,
