@@ -34,9 +34,9 @@ func GetUserByEmail(db *sql.DB, email string) (*models.User, error) {
 	return &user, nil
 }
 
-func GetUserByID(db *sql.DB, id int64) (*models.User, error) {
+func GetUserByID(db *sql.DB, id string) (*models.User, error) {
 	var user models.User
-	query := `SELECT id, username, email, password, created_at, FROM users WHERE id = $1`
+	query := `SELECT id, username, email, password, created_at FROM users WHERE id = $1`
 	err := db.QueryRow(query, id).Scan(
 		&user.ID,
 		&user.Username,
@@ -51,4 +51,31 @@ func GetUserByID(db *sql.DB, id int64) (*models.User, error) {
 		return nil, err
 	}
 	return &user, nil
+}
+
+func GetUserByUsername(db *sql.DB, username string) (*models.User, error) {
+	var user models.User
+	query := `SELECT id, username, email, password, created_at FROM users WHERE username = $1`
+	err := db.QueryRow(query, username).Scan(
+		&user.ID,
+		&user.Username,
+		&user.Email,
+		&user.Password,
+		&user.CreatedAt,
+	)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+		return nil, err
+	}
+	return &user, nil
+}
+
+func UpdateUser(db *sql.DB, user *models.User) error {
+	query := `
+    UPDATE users SET username = $1, email = $2, password = $3 WHERE id = $4
+  `
+	_, err := db.Exec(query, user.Username, user.Email, user.Password, user.ID)
+	return err
 }
