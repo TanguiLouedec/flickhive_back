@@ -25,6 +25,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Could not connect to DB", zap.Error(err))
 	}
+	log.Info("DB connected", zap.String("url", os.Getenv("DB_URL")))
 	defer db.Close()
 
 	r := handlers.NewRouter(log, db)
