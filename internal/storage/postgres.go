@@ -25,6 +25,8 @@ func ConnectDB() (*sql.DB, error) {
 		return nil, fmt.Errorf("sql.Open error: %w", err)
 	}
 
+	db.SetMaxOpenConns(25)
+
 	if err = db.Ping(); err != nil {
 		return nil, fmt.Errorf("db.Ping error: %w", err)
 	}
